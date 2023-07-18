@@ -16,6 +16,7 @@ jobs:
       - id: version
         uses: salsify/action-detect-and-tag-new-version@v2
         with:
+          tag-template: '{VERSION}'
           version-command: |
             cat VERSION
 
