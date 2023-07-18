@@ -1,0 +1,23 @@
+name: Docker
+on:
+  pull_request:
+  merge_group:
+env:
+  PR_NUMBER: ${{ github.event.number }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build the serlo-mysql-database image
+        uses: docker/build-push-action@v4
+        with:
+          push: false
+          load: true
+          file: ./Dockerfile
+          tags: serlo-mysql-database:PR-${{ env.PR_NUMBER }}
+      - name: Test for mysql in the serlo-mysql-database image
+        run:
+          docker run --entrypoint='' --rm serlo-mysql-database:PR-${{ env.PR_NUMBER }} mysql --version
