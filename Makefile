@@ -19,5 +19,7 @@ dump:
 		--databases serlo > docker-entrypoint-initdb.d/001-init.sql
 
 rollback:
+	docker compose cp docker-entrypoint-initdb.d/001-init.sql \
+		mysql:/docker-entrypoint-initdb.d/001-init.sql
 	docker compose exec mysql \
 		sh -c "pv /docker-entrypoint-initdb.d/001-init.sql | serlo-mysql"
