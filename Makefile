@@ -4,7 +4,7 @@ help:
 	@echo "help      – Show this help"
 	@echo "up        – Start the mysql container locally"
 	@echo "down      – Stop the mysql container"
-	@echo "dump      – Dump to the local `.sql` file"
+	@echo "dump      – Dump to the local '.sql' file"
 
 up:
 	docker compose up --detach
