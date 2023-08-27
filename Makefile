@@ -15,8 +15,7 @@ down:
 
 dump:
 	docker compose exec -T mysql mysqldump --user=root --password=secret \
-		--lock-all-tables --complete-insert --skip-extended-insert \
-		--comments --skip-dump-date --default-character-set=utf8mb4 \
+		--lock-all-tables --default-character-set=utf8mb4 \
 		--databases serlo > docker-entrypoint-initdb.d/001-init.sql
 
 rollback:
