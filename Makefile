@@ -9,7 +9,7 @@ help:
 	@echo "rollback  – Rollback to local '.sql' file"
 
 up:
-	docker compose up --detach
+	docker compose up --build --detach
 
 down:
 	docker compose down
