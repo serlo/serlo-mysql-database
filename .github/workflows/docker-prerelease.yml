@@ -26,7 +26,7 @@ jobs:
         with:
           push: true
           file: ./Dockerfile
-          tags: eu.gcr.io/serlo-shared/serlo-mysql-database:${{ github.ref }}
+          tags: eu.gcr.io/serlo-shared/serlo-mysql-database:${{ github.ref_name }}
       - name: Test for mysql in the serlo-mysql-database image
         run:
-          docker run --entrypoint='' --rm eu.gcr.io/serlo-shared/serlo-mysql-database:{{ github.ref }} mysql --version
+          docker run --entrypoint='' --rm eu.gcr.io/serlo-shared/serlo-mysql-database:{{ github.ref_name }} mysql --version
