@@ -25,5 +25,8 @@ mysql:
 rollback:
 	docker compose cp docker-entrypoint-initdb.d/001-init.sql \
 		mysql:/docker-entrypoint-initdb.d/001-init.sql
+	docker compose exec -it mysql mysql \
+		--user=root --password=secret -e \
+		"DROP DATABASE IF EXISTS serlo; CREATE DATABASE serlo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;"
 	docker compose exec mysql \
 		sh -c "pv /docker-entrypoint-initdb.d/001-init.sql | serlo-mysql"
