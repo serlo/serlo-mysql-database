@@ -1,4 +1,4 @@
-FROM mysql:8.0-debian
+FROM mysql:8.0.31-debian
 RUN apt update && apt install -y pv
 COPY docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
 COPY conf.d/mysqld.cnf /etc/mysql/conf.d
