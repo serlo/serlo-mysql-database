@@ -1,4 +1,4 @@
-FROM mysql:8.0.31-debian
+FROM mysql:8.0.36-debian
 RUN apt-get update && apt-get install -y --no-install-recommends pv \
     # Clean up the apt cache by removing /var/lib/apt/lists
     && rm -rf /var/lib/apt/lists/* \
