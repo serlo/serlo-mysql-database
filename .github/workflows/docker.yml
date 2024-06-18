@@ -31,7 +31,7 @@ jobs:
           credentials_json: '${{ secrets.GCP_KEY_CONTAINER_REGISTRY }}'
       - uses: google-github-actions/setup-gcloud@v2
       - run: gcloud auth configure-docker
-      - uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v6
         with:
           push: true
           file: ./Dockerfile
