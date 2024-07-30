@@ -26,16 +26,17 @@ jobs:
     if: ${{ needs.update-version.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
-      - uses: google-github-actions/auth@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          credentials_json: '${{ secrets.GCP_KEY_CONTAINER_REGISTRY }}'
-      - uses: google-github-actions/setup-gcloud@v2
-      - run: gcloud auth configure-docker
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v6
         with:
           push: true
           file: ./Dockerfile
-          tags: eu.gcr.io/serlo-shared/serlo-mysql-database:latest,eu.gcr.io/serlo-shared/serlo-mysql-database:${{ needs.update-version.outputs.tag }}
+          tags: ghcr.io/${{ github.repository }}:latest,ghcr.io/${{ github.repository }}/serlo-mysql-database:${{ needs.update-version.outputs.tag }}
       - name: Test for mysql in the serlo-mysql-database image
         run:
-          docker run --entrypoint='' --rm eu.gcr.io/serlo-shared/serlo-mysql-database:latest mysql --version
+          docker run --entrypoint='' --rm ghcr.io/${{ github.repository }}:latest mysql --version

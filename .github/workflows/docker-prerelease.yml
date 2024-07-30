@@ -17,16 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: google-github-actions/auth@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          credentials_json: '${{ secrets.GCP_KEY_CONTAINER_REGISTRY }}'
-      - uses: google-github-actions/setup-gcloud@v2
-      - run: gcloud auth configure-docker
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v6
         with:
           push: true
           file: ./Dockerfile
-          tags: eu.gcr.io/serlo-shared/serlo-mysql-database:${{ github.ref_name }}
+          tags: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
       - name: Test for mysql in the serlo-mysql-database image
         run:
-          docker run --entrypoint='' --rm eu.gcr.io/serlo-shared/serlo-mysql-database:${{ github.ref_name }} mysql --version
+          docker run --entrypoint='' --rm ghcr.io/${{ github.repository }}:${{ github.ref_name }} mysql --version
