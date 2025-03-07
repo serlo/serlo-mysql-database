@@ -1,5 +1,6 @@
 FROM mysql:8.0.36-debian
-RUN apt-get update && apt-get install -y --no-install-recommends pv \
+
+RUN apt-get update && apt-get install -y --no-install-recommends pv git-lfs \
     # Clean up the apt cache by removing /var/lib/apt/lists
     && rm -rf /var/lib/apt/lists/* \
     # Clear out the local repository of retrieved package files
