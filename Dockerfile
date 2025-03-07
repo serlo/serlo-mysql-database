@@ -5,7 +5,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends pv git-lfs \
     && rm -rf /var/lib/apt/lists/* \
     # Clear out the local repository of retrieved package files
     && apt-get clean
-COPY docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
+
+COPY docker-entrypoint-initdb.tar .
+
+RUN tar -xvzf docker-entrypoint-initdb.tar
+
 COPY conf.d/mysqld.cnf /etc/mysql/conf.d
 # The entrypoint script will not run when `serlo.cnf` is in /etc/mysql/conf.d
 # as well. Thus we store it in another place and use the `serlo-mysql`

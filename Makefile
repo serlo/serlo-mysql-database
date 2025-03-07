@@ -8,7 +8,7 @@ help:
 	@echo "mysql     – Connect to local MySQL server with a shell"
 	@echo "rollback  – Rollback to local '.sql' file"
 
-up:
+up: unzip
 	docker compose up --build --detach
 
 down:
