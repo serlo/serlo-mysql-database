@@ -14,7 +14,7 @@ In order to change the DB image via DB migrations do the following:
 1. Run MySQL DB in this repository with `make up`.
 2. Run DB migrations
 3. Check the changes in the DB via `make mysql`.
-4. Make a new dump via `make dump` and commit your changes.
+4. Make a new dump via `make dump` and `make zip` and commit your changes.
 
 ## Publish Image
 
