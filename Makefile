@@ -19,6 +19,12 @@ dump:
 		--lock-all-tables --default-character-set=utf8mb4 \
 		--databases serlo > docker-entrypoint-initdb.d/001-init.sql
 
+zip:
+	tar -zcvf docker-entrypoint-initdb.tar docker-entrypoint-initdb.d
+
+unzip:
+	tar -xvzf docker-entrypoint-initdb.tar
+
 mysql:
 	docker compose exec -it mysql serlo-mysql
 
