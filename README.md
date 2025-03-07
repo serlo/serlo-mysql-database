@@ -7,6 +7,10 @@ This repository contains a custom `mysql` docker image. Changes we have made:
 - The command line tool `pv` is available as well. It provides a progress bar
   when a `.sql` file is imported. Usage: `pv file.sql | serlo-mysql`
 
+## Requirements
+- Docker
+- [Git LFS](https://github.com/git-lfs/git-lfs)
+
 ## Change DB via migrations
 
 In order to change the DB image via DB migrations do the following:
