@@ -8,7 +8,7 @@ help:
 	@echo "mysql     – Connect to local MySQL server with a shell"
 	@echo "rollback  – Rollback to local '.sql' file"
 
-up:
+up: unzip
 	docker compose up --build --detach
 
 down:
@@ -18,6 +18,12 @@ dump:
 	docker compose exec -T mysql mysqldump --user=root --password=secret \
 		--lock-all-tables --default-character-set=utf8mb4 \
 		--databases serlo > docker-entrypoint-initdb.d/001-init.sql
+
+zip:
+	tar -zcvf docker-entrypoint-initdb.tar docker-entrypoint-initdb.d
+
+unzip:
+	tar -xvzf docker-entrypoint-initdb.tar
 
 mysql:
 	docker compose exec -it mysql serlo-mysql
